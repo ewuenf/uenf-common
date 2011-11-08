@@ -1,1 +1,3 @@
-common classes used in all my projects
+This project shall contain all classes und functions that are helpful in more than one uenf-project
+(its a kind of standard-lib building on and extending std,boost,Eigen,etc to my needs and preferences,
+mostly with good justification).

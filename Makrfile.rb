@@ -1,4 +1,7 @@
 
+Makr.loadExtension("ToolChainLinuxGcc")
+
+
 # "parse" arguments
 $arguments = Makr.getArgs()
 $localDir = File.dirname($arguments.scriptFile)
@@ -18,12 +21,7 @@ def configureBase()
   compilerConfig.clear()
   compilerConfig["compiler"] = "g++"
   compilerConfig["compiler.includePaths"] = " -I" + $localDir + "/src -I/mnt/programmieren/math_libs/"
-  compilerConfig["linker"] = "g++"
-  compilerConfig["linker.libs"] = "-ljpeg -lboost_system -lboost_filesystem -lGL -lglut -lGLU -lgpcl -lraw1394"
-  compilerConfig["linker.libs"] += " -ldc1394 -lz -lgpcl -lQtXml -lopencv_core -lopencv_calib3d"
-
-  compilerConfigC = $build.makeNewConfig("CompileTaskC", "CompileTaskCPP")
-  compilerConfigC["compiler"] = "gcc"
+  #compilerConfig["linker.libs"] = "-ljpeg"
 end
 
 
@@ -100,10 +98,7 @@ def configure()
 end
 
 
-
-if($target == "clean")
-  system("rm -f " + $buildDir + "/*")
-else
+def buildIt()
   # first get build
   $build = Makr.loadBuild(Makr.cleanPathName($buildDir))
   # then use build block concept to ensure the build is saved
@@ -112,18 +107,17 @@ else
 
     allCPPFiles = Makr::FileCollector.collect($localDir + "/src/", "*.{cpp,cxx}", true)
     tasks = Makr.applyGenerators(allCPPFiles, [Makr::CompileTaskGenerator.new($build, $build.getConfig("CompileTaskCPP"))])
-    allHeaderFiles = Makr::FileCollector.collect($localDir + "/src/", "*.{h}", true)
-    tasks.concat(Makr.applyGenerators(allHeaderFiles, [Makr::MocTaskGenerator.new($build, $build.getConfig("CompileTaskCPP"))]))
-    allCFiles = Makr::FileCollector.collect($localDir + "/src/", "*.c", true)
-    tasks.concat(Makr.applyGenerators(allCFiles,      [Makr::CompileTaskGenerator.new($build, $build.getConfig("CompileTaskC"))]))
 
-    myProgramTask = Makr.makeProgram($buildDir + "/SIMERO_v2010.0", $build, tasks, $build.getConfig("CompileTaskCPP"))
+    myLibTask = Makr.makeStaticLib($buildDir + "/libuenf-common.a", $build, tasks, $build.getConfig("CompileTaskCPP"))
 
-    $build.nrOfThreads = 2
     $build.build()
+  end  
+end
 
-    # make local link, so that the currently active configuration gets linked automatically
-    File.delete("SIMERO_v2010.0") rescue nil
-    File.symlink($buildDir + "/SIMERO_v2010.0", "SIMERO_v2010.0") rescue nil
-  end
+
+# main logic ###########################################################################################
+if($target == "clean")
+  system("rm -f " + $buildDir + "/*")
+else
+  buildIt()
 end
