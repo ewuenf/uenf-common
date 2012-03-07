@@ -2,7 +2,7 @@
 #define COWBOI_THREADEDOBJECT_H
 
 
-#include <Cowboi/Exceptions.h>
+#include <uenf/Exceptions.h>
 
 
 #include <boost/thread.hpp>
@@ -14,7 +14,7 @@
 
   
 
-namespace Cowboi
+namespace uenf
 {
 
 
@@ -155,7 +155,7 @@ private:
 
 
 
-} // end of namespace Cowboi
+} // end of namespace uenf
 
 
 #endif

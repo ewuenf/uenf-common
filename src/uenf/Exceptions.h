@@ -9,7 +9,7 @@
 
 
 
-namespace Cowboi
+namespace uenf
 {
 
 
@@ -21,8 +21,8 @@ public:
 	~ExceptionBase() throw() {}
 };
 
-class TagCowboiException {};
-typedef boost::error_info<TagCowboiException, std::string> ExceptionStringInfo;
+class TaguenfException {};
+typedef boost::error_info<TaguenfException, std::string> ExceptionStringInfo;
 
 
 
@@ -120,7 +120,7 @@ public:
   ExceptionParameter(int parameterNrArg = 0):parameterNr(parameterNrArg)
   {
     (*this) << ExceptionStringInfo(std::string("Error in parameter nr. "))
-            << boost::error_info<TagCowboiException, const int>(parameterNrArg);
+            << boost::error_info<TaguenfException, const int>(parameterNrArg);
   }
   const int parameterNr;
 
@@ -181,7 +181,7 @@ public:
 
 
 
-} // end of namespace cowboi
+} // end of namespace uenf
 
 
 

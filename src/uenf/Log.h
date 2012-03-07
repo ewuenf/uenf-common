@@ -17,7 +17,7 @@
 
 
 // some forward decls for operator<<
-namespace Cowboi
+namespace uenf
 {
   namespace Log
   {
@@ -25,15 +25,15 @@ namespace Cowboi
     class SyncUser;
   }
 }
-void operator<<(std::ostringstream & oss, Cowboi::Log::Sync const & logSync);
-void operator<<(std::ostringstream & oss, Cowboi::Log::SyncUser const & logSyncUser);
+void operator<<(std::ostringstream & oss, uenf::Log::Sync const & logSync);
+void operator<<(std::ostringstream & oss, uenf::Log::SyncUser const & logSyncUser);
 
 
 
 
 
 
-namespace Cowboi
+namespace uenf
 {
 
 
@@ -42,7 +42,7 @@ namespace Cowboi
   Logging Framework, thread-safe and easy to use and extend (see below).
 
 
-  Example usage would be (assuming user is in namespace Cowboi):
+  Example usage would be (assuming user is in namespace uenf):
 
   Log::log("some std::string", Log::info);
 
@@ -207,8 +207,8 @@ public:
 class LogDispatcher
 {
   friend class Logger;
-  friend void ::operator<<(std::ostringstream & oss, Cowboi::Log::Sync const & logSync);
-  friend void ::operator<<(std::ostringstream & oss, Cowboi::Log::SyncUser const & logSyncUser);
+  friend void ::operator<<(std::ostringstream & oss, uenf::Log::Sync const & logSync);
+  friend void ::operator<<(std::ostringstream & oss, uenf::Log::SyncUser const & logSyncUser);
   friend void log(std::string message, Severity severity);
   friend void log(std::string message, unsigned int userCode);
 
@@ -249,7 +249,7 @@ void log(std::string message, unsigned int userCode);
 
 
 
-}  // end of namespace Cowboi
+}  // end of namespace uenf
 
 
 

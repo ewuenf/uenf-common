@@ -1,15 +1,15 @@
 
 
 
-#include <Cowboi/Log.h>
-#include <Cowboi/Exceptions.h>
+#include <uenf/Log.h>
+#include <uenf/Exceptions.h>
 
 #include <iostream>
 #include <fstream>
 #include <ciso646>
 
 
-namespace Cowboi
+namespace uenf
 {
 
 namespace Log
@@ -61,7 +61,7 @@ std::string Logger::getSeverityPrefix(Severity severity)
     case fatal:   return std::string(" FATAL: "   );
 
     default:
-      BOOST_THROW_EXCEPTION(Cowboi::ExceptionParameter());
+      BOOST_THROW_EXCEPTION(uenf::ExceptionParameter());
   }
 }
 
@@ -243,7 +243,7 @@ void log(std::string message, unsigned int userCode)
 
 
 
-}  // end of namespace Cowboi
+}  // end of namespace uenf
 
 
 
@@ -255,14 +255,14 @@ void log(std::string message, unsigned int userCode)
 
 // These operators are global to avoid name searching problems with the compiler
 
-void operator<<(std::ostringstream & oss, Cowboi::Log::Sync const & logSync)
+void operator<<(std::ostringstream & oss, uenf::Log::Sync const & logSync)
 {
-  Cowboi::Log::LogDispatcher::callLoggers(oss.str(), logSync.severity);
+  uenf::Log::LogDispatcher::callLoggers(oss.str(), logSync.severity);
 }
 
-void operator<<(std::ostringstream & oss, Cowboi::Log::SyncUser const & logSyncUser)
+void operator<<(std::ostringstream & oss, uenf::Log::SyncUser const & logSyncUser)
 {
-  Cowboi::Log::LogDispatcher::callLoggers(oss.str(), logSyncUser.userCode);
+  uenf::Log::LogDispatcher::callLoggers(oss.str(), logSyncUser.userCode);
 }
 
 
