@@ -1,0 +1,16 @@
+why no copy-on-write for the image:
+
+  -> copy-on-write has to be done thread-safe?
+  -> if it is multi-threaded, also the thread the image was copied from can suffer performance,
+     because copy-on-write is symmetric: Any write access must perform the copy, regardless of
+     which thread it originates from, besides blocking a write on another thread. This can lead
+     to unexpected behaviour for the thread the image is copied from, since it cannot know,
+     if the image was copy-on-write'd as it didnt do that explicitely. Thats not 
+     Principle-of-least-surprise (POLS). So copy-on-write is only for the lazy programmer
+     coming from for example Java. Others will want to explicitely control copy ops.
+     
+     on the other hand copying the image would require locking of some kind, but this should
+     not be done internally but explicitely by the user, as we dont want to design the image
+     class itself thread-safe as this would induce unwanted overhead.
+     But as the locking is explicit then, the nothing unexpected happens, or at least nothing
+     that isn't visible to the programmer. (which is very much of what happens in Qt Image).

@@ -1,0 +1,3 @@
+Text-Copy-Interface: angezeigter Text und kopierter unterscheiden sich, z.B.
+  wenn man einen Text mit Punkten abkürzt um Anfang und Ende anzuzeigen (z.B. email-Addr), wird
+  dennoch alles kopiert und nicht der Text mit den Punkten

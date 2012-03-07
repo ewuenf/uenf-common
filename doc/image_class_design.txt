@@ -1,0 +1,7 @@
+
+the image type system must support: (KISS, readable but with reuse)
+
+fixed and dynamic size
+owned and non-owned memory -> deriving from a common ancestor
+dimensionality
+[Pixel Type Inheritance, how?]

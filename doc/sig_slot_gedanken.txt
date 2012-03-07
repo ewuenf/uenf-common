@@ -1,0 +1,11 @@
+pro contra sig slot template
+
+  -> sigs und slots als template sind sehr flexibel und komplett innerhalb der Sprache
+  -> sigs und slots mit meta-compiler sind noch flexibler, da dieser machen kann, was
+     er will, aber nicht so flexibel wegen Probleme mit Mehrfachvererbung und da der
+     Benutzer duch explizite Deklaration von Sigs und slots sich einschränkt
+  -> sigs und slots sollten in durch swig generierten Interfaces simpel nutzbar sein,
+     templates gehen aber in skript-sprachen nicht. 
+     Andererseits müsste es in Skript-
+     sprachen sehr einfach sein, etwas sig-slot-artiges zu progen schon mit Sprachmitteln,
+     was dann auch sehr flexibel wäre?

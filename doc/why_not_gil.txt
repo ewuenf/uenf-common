@@ -1,0 +1,13 @@
+warum nicht GIL:
+
++ Ich will Fixed-Size Images, weiß nicht, wie ich das abbilden soll
++ Trennung von Image und View bedeutet das Herumschleppen von zwei Objekten, die sich auf ein "Ding" beziehen
++ Kommentar in image.hpp von GIL komisch (zeile 200): // when value_type is a non-pixel, like int or float, num_channels< ... > doesn't work
+  deutet darauf hin, dass die Allokation und die Kenntnis des Pixeltyps zu trennen nicht sinnvoll ist
+
+Design:
+
+3D-Image made out of 2D-Images made out of 1D-Images
+Memory-Mapped-I/O (means non-managed memory adaptor)
+
+Ausserdem: verwendung von template-meta-programming erschwert benutzung und ist ein stolperstein für Werkzeuge wie SWIG

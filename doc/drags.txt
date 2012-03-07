@@ -1,0 +1,1 @@
+ein drag-and-drop-vorgang ist eine Dreier-Kommunikation: Drag-Start-Object, Drag-Object, Drop-Object (oder statt Object "Area, Widget, ...")

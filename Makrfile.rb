@@ -19,56 +19,55 @@ $boostDir = "/mnt/programmieren/current_boost"
 def configureBase()
   compilerConfig = $build.makeNewConfig("CompileTaskCPP")
   compilerConfig.clear()
-  compilerConfig["compiler"] = "g++"
-  compilerConfig["compiler.includePaths"] = " -I" + $localDir + "/src -I/mnt/programmieren/math_libs/"
-  #compilerConfig["linker.libs"] = "-ljpeg"
+  compilerConfig["compiler.cFlags"] = " -Wall -Werror -fexceptions"
+  compilerConfig["compiler.includePaths"] = " -I#{$localDir}/src -I#{$eigenDir} -I#{$boostDir}"
 end
 
 
 def configureMaxDebug()
   compilerConfig = $build.getConfig("CompileTaskCPP")
-  compilerConfig["compiler.cFlags"] = "-ggdb -fstack-check  -fno-eliminate-unused-debug-types -Wall -fexceptions -Wno-long-long"
-  compilerConfig["compiler.defines"] = "-DDEBUG -D_GLIBCXX_DEBUG"
+  compilerConfig["compiler.cFlags"] += " -ggdb -fstack-check  -fno-eliminate-unused-debug-types"
+  compilerConfig["compiler.defines"] = " -DDEBUG -D_GLIBCXX_DEBUG"
 end
 
 
 def configureStdLibDebug()
   compilerConfig = $build.getConfig("CompileTaskCPP")
-  compilerConfig["compiler.cFlags"] = "-ggdb -fno-eliminate-unused-debug-types -Wall -fexceptions -Wno-long-long"
-  compilerConfig["compiler.defines"] = "-DDEBUG -D_GLIBCXX_DEBUG"
+  compilerConfig["compiler.cFlags"] += " -ggdb -fno-eliminate-unused-debug-types"
+  compilerConfig["compiler.defines"] = " -DDEBUG -D_GLIBCXX_DEBUG"
 end
 
 
 def configureDebug()
   compilerConfig = $build.getConfig("CompileTaskCPP")
-  compilerConfig["compiler.cFlags"] = "-ggdb -fno-eliminate-unused-debug-types -Wall -fexceptions -Wno-long-long"
-  compilerConfig["compiler.defines"] = "-DDEBUG"
+  compilerConfig["compiler.cFlags"] += " -ggdb -fno-eliminate-unused-debug-types"
+  compilerConfig["compiler.defines"] = " -DDEBUG"
 end
 
 
 def configureReleaseStdLibDebug()
   compilerConfig = $build.getConfig("CompileTaskCPP")
-  compilerConfig["compiler.cFlags"] = "-O2 -ggdb -fno-eliminate-unused-debug-types -Wall -fexceptions -Wno-long-long"
-  compilerConfig["compiler.defines"] = "-D_GLIBCXX_DEBUG"
+  compilerConfig["compiler.cFlags"] += " -O2 -ggdb -fno-eliminate-unused-debug-types"
+  compilerConfig["compiler.defines"] = " -D_GLIBCXX_DEBUG"
 end
 
 
 def configureReleaseDebug()
   compilerConfig = $build.getConfig("CompileTaskCPP")
-  compilerConfig["compiler.cFlags"] = "-O2 -ggdb -fno-eliminate-unused-debug-types -Wall -fexceptions -Wno-long-long"
-  compilerConfig["compiler.defines"] = "-DDEBUG"
+  compilerConfig["compiler.cFlags"] += " -O2 -ggdb -fno-eliminate-unused-debug-types"
+  compilerConfig["compiler.defines"] = " -DDEBUG"
 end
 
 
 def configureRelease()
   compilerConfig = $build.getConfig("CompileTaskCPP")
-  compilerConfig["compiler.cFlags"] = "-O3 -Wall -fexceptions -Wno-long-long"
+  compilerConfig["compiler.cFlags"] += " -O3"
 end
 
 
 def configureProfiling()
   compilerConfig = $build.getConfig("CompileTaskCPP")
-  compilerConfig["compiler.cFlags"] = "-O3 -pg -Wall -fexceptions -Wno-long-long"
+  compilerConfig["compiler.cFlags"] += " -O3 -pg"
 end
 
 

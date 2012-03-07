@@ -1,0 +1,31 @@
+
+Die Verwendung eines Iterators f�r ein Bild erspart eine �berpr�fung des Zugriffs w�hrend der Schleife
+taking a lambda or function object:
+safe image iterator
+safe subImage iterator (testing the access bounds ahead and thus only once)
+  Reine sequenz und auch x-y-Pos anbieten im Interface
+image kann auch gelocked werden in der Zeit der Verwendung (sodass kein L�schen oder �ndern m�glich ist)  
+
+
+
+Fixed-Size template image:
+  Vorteil Grenzen k�nnen zur Compilezeit getestet werden 
+           ( aber nur, wenn auf einen Pixel mit konstanten Positionsparametern zugegriffen wird (constexpr?) )
+          [Compiler kann besser optimieren?, bringt das was?]
+          Es gibt einige typische feste Gr��en
+  Nachteile typischerweise werden berechnete Indizes verwendet
+            solch ein Bild k�nnte auf dem Stack allokiert werden und somit zum �berlauf f�hren
+            macht die Typ-Hierarchie komplizierter
+            
+            
+            
+Als l�sung evtl. fixed-size template als abgeleitete Klasse von Image
+
+
+
+thread-safety bei Kopie erforderlich, da das das erwartete Verhalten ist
+High-Performance bei lesendem und schreibendem Zugriff gewollt - Inlining
+  Beim schreibenden Zugriff ist dies nur mit explizit erzeugten Objekten möglich, die durch ihre Erzeugung
+  die Kopie sicherstellen und deren Zugriffscode dann geinlined werden kann (z.B. Iteratoren
+  oder eine Bildumwandlung), alternativ sind Indexzugriffe immer langsam
+Wie machts die QT?
