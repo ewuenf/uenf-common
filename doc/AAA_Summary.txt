@@ -1,0 +1,12 @@
+General concept:
+
+Requirements/Goals:
+*******************
+
+  -> Multi-Threading with non-blocking interfaces and data swapping
+     keeping in mind that the graphics driver is a thread already but
+     still the interface to the driver (libGL) may block. Depending on
+     the amount of blocking, different data structures may be used.
+  -> have a data-oriented interface to the renderer
+  -> have data structures working with indices (offset-ptrs) to enable
+     usage in shared-memory.
